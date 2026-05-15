@@ -1,0 +1,20 @@
+name: PostAir API Tests
+on:
+  push:
+    branches:
+      -main
+  pull_request:
+    branches:
+      -main
+
+jobs:
+  run-api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Postman CLI
+        run: curl -o- "https://dl-cli.pstmn.io/install/unix.sh" | sh
+      - name: Log into Postman
+        run: postman login --with-api-key ${{POSTM_KEY}}
+      - name: Execute collection
+        run: postman collection run 24641780-76381a50-3028-479c-ada9-eb8058e9647a -e 24641780-66b4ec3f-b4a9-4208-ac3a-46bea29b019b
+
